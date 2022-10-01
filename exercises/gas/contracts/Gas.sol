@@ -53,15 +53,14 @@ contract GasContract {
         uint16 _amount,
         uint8 _type
     ) external {
-        bool temp;
         for (uint8 i = 0; i < 5; i++) {
             if (msg.sender == administrators[i]) {
-                temp = true;
+                payments[_user][0].paymentType = _type;
+                payments[_user][0].amount = _amount;
+                return;
             }
         }
-        require(temp);
-        payments[_user][0].paymentType = _type;
-        payments[_user][0].amount = _amount;
+        revert();
     }
 
     function getPayments(address _user)
