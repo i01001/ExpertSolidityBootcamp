@@ -3,7 +3,6 @@ pragma solidity 0.8.17;
 
 contract GasContract {
     uint16 public immutable totalSupply; // cannot be updated
-    address immutable Owner;
     address[5] public administrators;
 
     struct Payment {
@@ -25,9 +24,8 @@ contract GasContract {
 
     constructor(address[5] memory _admins, uint16 _totalSupply) {
         totalSupply = _totalSupply;
-        Owner = msg.sender;
         administrators = _admins;
-        balances[Owner] = totalSupply;
+        balances[msg.sender] = totalSupply;
     }
 
     function transfer(
@@ -59,8 +57,7 @@ contract GasContract {
             }
         }
         revert();
-        }
-    }
+    }}
 
     function getPayments(address _user)
         external
