@@ -9,6 +9,9 @@
     "hardhat": "^2.10.1",
     "hardhat-gas-reporter": "^1.0.6"
   },
+  "scripts": {
+    "storage-diagram": "sol2uml storage ./contracts/ -c GasContract -o gasStorage.svg"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.0",
     "keccak256": "^1.0.6",
