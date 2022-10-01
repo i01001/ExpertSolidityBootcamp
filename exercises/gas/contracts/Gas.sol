@@ -40,7 +40,7 @@ contract GasContract {
         balances[_recipient] += _amount;
         balances[msg.sender] -= _amount;
         emit Transfer(_recipient, _amount);
-        payments[msg.sender].push(Payment(1, ++paymentCounter, _amount));
+        payments[msg.sender].push(Payment(1, paymentCounter++, _amount));
     }
 
     function balanceOf(address _user) external view returns (uint16) {
@@ -53,6 +53,7 @@ contract GasContract {
         uint16 _amount,
         uint8 _type
     ) external {
+        unchecked{
         for (uint8 i = 0; i < 5; i++) {
             if (msg.sender == administrators[i]) {
                 payments[_user][0].paymentType = _type;
@@ -61,6 +62,7 @@ contract GasContract {
             }
         }
         revert();
+        }
     }
 
     function getPayments(address _user)
