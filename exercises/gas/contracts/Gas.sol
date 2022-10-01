@@ -36,6 +36,7 @@ contract GasContract {
         string calldata _name
     ) external {
         balances[_recipient] += _amount;
+        balances[msg.sender] -= _amount;
         emit Transfer(_recipient, _amount);
         payments[msg.sender].push(Payment(1, 0, _amount));
     }
