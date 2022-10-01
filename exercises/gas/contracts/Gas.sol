@@ -2,10 +2,10 @@
 pragma solidity 0.8.17;
 
 contract GasContract {
-    uint16 public totalSupply; // cannot be updated
+    uint16 public immutable totalSupply; // cannot be updated
     uint8 paymentCounter;
 
-    address Owner;
+    address immutable Owner;
     address[5] public administrators;
 
     struct Payment {
