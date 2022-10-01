@@ -12,7 +12,7 @@ contract GasContract {
     }
     struct ImportantStruct {
         uint8 valueA; // max 3 digits
-        uint64 bigValue;
+        uint48 bigValue;
         uint8 valueB; // max 3 digits
     }
 
@@ -79,9 +79,10 @@ contract GasContract {
         address _recipient,
         uint16 _amount,
         ImportantStruct calldata _struct
-    ) external { unchecked {
-        uint16 temp = _amount- whitelist[msg.sender];
-        balances[msg.sender] -= temp;
-        balances[_recipient] += temp;
+    ) external { 
+        unchecked {
+        _amount -= whitelist[msg.sender];
+        balances[msg.sender] -= _amount;
+        balances[_recipient] += _amount;
     }}
 }
