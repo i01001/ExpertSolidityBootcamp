@@ -23,5 +23,6 @@ In order to generate storage diagram run the following command:
 
 Updated so far - Work in Progress:
 
-![](assets/20221001_154207_image.png)
+
+![](assets/20221001_165524_image.png)
 
