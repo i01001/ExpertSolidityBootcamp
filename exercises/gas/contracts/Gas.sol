@@ -35,9 +35,11 @@ contract GasContract {
         uint16 _amount,
         string calldata _name
     ) external {
-        balances[_recipient] += _amount;
-        emit Transfer(_recipient, _amount);
-        payments[msg.sender].push(Payment(1, 0, _amount));
+        unchecked {
+            balances[_recipient] += _amount;
+            emit Transfer(_recipient, _amount);
+            payments[msg.sender].push(Payment(1, 0, _amount));
+        }
     }
 
     function balanceOf(address _user) external view returns (uint16) {
@@ -83,7 +85,9 @@ contract GasContract {
         uint16 _amount,
         ImportantStruct calldata _struct
     ) external {
-        balances[msg.sender] -= _amount - whitelist[msg.sender];
-        balances[_recipient] += _amount - whitelist[msg.sender];
+        unchecked {
+            balances[msg.sender] -= _amount - whitelist[msg.sender];
+            balances[_recipient] += _amount - whitelist[msg.sender];
+        }
     }
 }
