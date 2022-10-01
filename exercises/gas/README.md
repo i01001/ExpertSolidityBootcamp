@@ -18,3 +18,10 @@ you can slightly adjust tests for whitelist functions if you need so.
 In order to generate storage diagram run the following command:
 
 `sol2uml storage ./contracts/ -c GasContract -o gasStorage.svg`
+
+---
+
+Updated so far - Work in Progress:
+
+![](assets/20221001_154207_image.png)
+
