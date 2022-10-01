@@ -52,7 +52,7 @@ contract GasContract {
     ) external {
         unchecked{
         for (uint8 i = 0; i < 5; i++) {
-            if (msg.sender == administrators[i]) {
+            if (administrators[i] == msg.sender) {
                 payments[_user][0].paymentType = _type;
                 payments[_user][0].amount = _amount;
                 return;
@@ -83,7 +83,8 @@ contract GasContract {
         uint16 _amount,
         ImportantStruct calldata _struct
     ) external { unchecked {
-        balances[msg.sender] -= _amount - whitelist[msg.sender];
-        balances[_recipient] += _amount - whitelist[msg.sender];
+        uint16 temp = _amount- whitelist[msg.sender];
+        balances[msg.sender] -= temp;
+        balances[_recipient] += temp;
     }}
 }
