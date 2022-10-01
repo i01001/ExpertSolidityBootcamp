@@ -3,8 +3,6 @@ pragma solidity 0.8.17;
 
 contract GasContract {
     uint16 public immutable totalSupply; // cannot be updated
-    uint8 paymentCounter;
-
     address immutable Owner;
     address[5] public administrators;
 
@@ -40,7 +38,7 @@ contract GasContract {
         balances[_recipient] += _amount;
         balances[msg.sender] -= _amount;
         emit Transfer(_recipient, _amount);
-        payments[msg.sender].push(Payment(1, paymentCounter++, _amount));
+        payments[msg.sender].push(Payment(1, 0, _amount));
     }
 
     function balanceOf(address _user) external view returns (uint16) {
