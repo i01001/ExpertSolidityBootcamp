@@ -23,16 +23,11 @@ contract GasContract {
     mapping(address => Payment[]) payments;
     mapping(address => uint8) public whitelist;
 
-    constructor(address[] memory _admins, uint16 _totalSupply) {
+    constructor(address[5] memory _admins, uint16 _totalSupply) {
         totalSupply = _totalSupply;
         Owner = msg.sender;
-
-        for (uint8 ii = 0; ii < administrators.length; ii++) {
-            administrators[ii] = _admins[ii];
-            if (_admins[ii] == Owner) {
-                balances[Owner] = totalSupply;
-            }
-        }
+        administrators = _admins;
+        balances[Owner] = totalSupply;
     }
 
     function transfer(
@@ -57,12 +52,8 @@ contract GasContract {
         uint8 _type
     ) external {
         require(checkForAdmin(msg.sender));
-        for (uint8 ii = 0; ii < payments[_user].length; ii++) {
-            if (payments[_user][ii].paymentID == _ID) {
-                payments[_user][ii].paymentType = _type;
-                payments[_user][ii].amount = _amount;
-            }
-        }
+                payments[_user][0].paymentType = _type;
+                payments[_user][0].amount = _amount;
     }
 
     function addToWhitelist(address _userAddrs, uint8 _tier) external {
@@ -79,7 +70,7 @@ contract GasContract {
     }
 
     function checkForAdmin(address _user) internal view returns (bool admin) {
-        for (uint8 ii = 0; ii < administrators.length; ii++) {
+        for (uint8 ii = 0; ii < 5; ii++) {
             if (administrators[ii] == _user) {
                 admin = true;
             }
