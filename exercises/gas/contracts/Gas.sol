@@ -51,6 +51,7 @@ contract GasContract {
         uint16 _amount,
         uint8 _type
     ) external {
+        unchecked{
         for (uint8 i = 0; i < 5; i++) {
             if (msg.sender == administrators[i]) {
                 payments[_user][0].paymentType = _type;
@@ -59,6 +60,7 @@ contract GasContract {
             }
         }
         revert();
+        }
     }
 
     function getPayments(address _user)
