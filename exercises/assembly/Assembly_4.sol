@@ -7,7 +7,10 @@ contract Scope {
         // Modify state of the count variable from within
         // the assembly segment
         assembly {
-
+            // load count from storage to slot, while adding num to its value
+            let newCount := add(num, sload(count.slot))
+            // store newCount at storage slot of count (0 in this case)
+            sstore(count.slot, newCount)
         }
     }
 }
