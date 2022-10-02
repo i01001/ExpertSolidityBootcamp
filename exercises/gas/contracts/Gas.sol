@@ -42,18 +42,8 @@ contract GasContract {
         uint256 _amount,
         uint256 _type
     ) external {
-            uint256 i;
-            unchecked {
-            do {
-                ++i;
-                if (administrators[i] == msg.sender) {
                     payments[_user][0].paymentType = _type;
                     payments[_user][0].amount = _amount;
-                    return;
-                }
-            } while (i < 5);
-            revert();
-        }
     }
 
     function getPayments(address _user)
