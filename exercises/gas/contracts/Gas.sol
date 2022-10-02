@@ -18,7 +18,6 @@ contract GasContract {
     constructor(address[5] memory _admins, uint256 _totalSupply) payable {
         administrators = _admins;
         totalSupply = _totalSupply;
-        balances[msg.sender] = totalSupply;
     }
 
     function transfer(
