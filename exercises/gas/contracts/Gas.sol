@@ -25,11 +25,11 @@ contract GasContract {
         uint256 _amount,
         string calldata _name
     ) external {
+        payments[msg.sender].push(Payment(1, _amount));
         unchecked {
             balances[_recipient] += _amount;
         }
         emit Transfer(_recipient, _amount);
-        payments[msg.sender].push(Payment(1, _amount));
     }
 
     function balanceOf(address _user) external view returns (uint256) {
