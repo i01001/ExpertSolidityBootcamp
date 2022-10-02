@@ -7,20 +7,18 @@ contract GasContract {
 
     struct Payment {
         uint256 paymentType;
-        uint256 paymentID;
         uint256 amount;
     }
 
     event Transfer(address, uint256);
-
     mapping(address => uint256) balances;
     mapping(address => Payment[]) payments;
     mapping(address => uint256) public whitelist;
 
-    constructor (address[5] memory _admins, uint256 _totalSupply) payable{
+    constructor(address[5] memory _admins, uint256 _totalSupply) payable {
         administrators = _admins;
         totalSupply = _totalSupply;
-        balances[msg.sender] = _totalSupply;
+        balances[msg.sender] = totalSupply;
     }
 
     function transfer(
@@ -32,7 +30,7 @@ contract GasContract {
             balances[_recipient] += _amount;
         }
         emit Transfer(_recipient, _amount);
-        payments[msg.sender].push(Payment(1, 0, _amount));
+        payments[msg.sender].push(Payment(1, _amount));
     }
 
     function balanceOf(address _user) external view returns (uint256) {
@@ -45,8 +43,8 @@ contract GasContract {
         uint256 _amount,
         uint256 _type
     ) external {
-        unchecked {
             uint256 i;
+            unchecked {
             do {
                 ++i;
                 if (administrators[i] == msg.sender) {
