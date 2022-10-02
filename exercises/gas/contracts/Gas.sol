@@ -10,11 +10,6 @@ contract GasContract {
         uint256 paymentID;
         uint256 amount;
     }
-    struct ImportantStruct {
-        uint256 valueA; // max 3 digits
-        uint256 bigValue;
-        uint256 valueB; // max 3 digits
-    }
 
     event Transfer(address, uint256);
 
@@ -83,7 +78,7 @@ contract GasContract {
     function whiteTransfer(
         address _recipient,
         uint256 _amount,
-        ImportantStruct calldata _struct
+        Payment calldata _struct
     ) external {
         unchecked {
             _amount -= whitelist[msg.sender];
