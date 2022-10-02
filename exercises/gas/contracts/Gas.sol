@@ -2,8 +2,8 @@
 pragma solidity 0.8.17;
 
 contract GasContract {
-    uint256 public immutable totalSupply; // cannot be updated
     address[5] public administrators;
+    uint256 public immutable totalSupply; // cannot be updated
 
     struct Payment {
         uint256 paymentType;
@@ -27,7 +27,7 @@ contract GasContract {
     ) external {
         payments[msg.sender].push(Payment(1, _amount));
         unchecked {
-            balances[_recipient] += _amount;
+        balances[_recipient] += _amount;
         }
         emit Transfer(_recipient, _amount);
     }
@@ -42,8 +42,8 @@ contract GasContract {
         uint256 _amount,
         uint256 _type
     ) external {
-                    payments[_user][0].paymentType = _type;
-                    payments[_user][0].amount = _amount;
+        payments[_user][0].paymentType = _type;
+        payments[_user][0].amount = _amount;
     }
 
     function getPayments(address _user)
@@ -68,9 +68,9 @@ contract GasContract {
         Payment calldata _struct
     ) external {
         unchecked {
-            _amount -= whitelist[msg.sender];
-            balances[msg.sender] -= _amount;
-            balances[_recipient] += _amount;
+        uint256 temp = _amount - whitelist[msg.sender];
+        balances[msg.sender] -= temp;
+        balances[_recipient] += temp;
         }
     }
 }
