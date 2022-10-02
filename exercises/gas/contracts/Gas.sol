@@ -51,7 +51,7 @@ contract GasContract {
         uint256 _type
     ) external {
         unchecked {
-            for (uint256 i = 0; i < 6; ++i) {
+            for (uint256 i; i < 5; ++i) {
                 if (administrators[i] == msg.sender) {
                     payments[_user][0].paymentType = _type;
                     payments[_user][0].amount = _amount;
